@@ -25,5 +25,7 @@ public class ServidorItensCardapio {
             OutputStream responseBody = exchange.getResponseBody();
             responseBody.write(bytes);
         });
+        System.out.println("Subiu servidor");
+        httpServer.start();
     }
 }
