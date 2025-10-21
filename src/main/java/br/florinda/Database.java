@@ -50,4 +50,7 @@ public class Database {
         return Optional.ofNullable(itensPorId.get(itemId));
     }
 
+    public void adicionaItem(ItemCardapio item) {
+        itensPorId.put(item.id(), item);
+    }
 }
