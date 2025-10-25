@@ -93,9 +93,19 @@ public class ServidorItensCardapioComSocket {
                 clientOut.println();
                 clientOut.println(listaItensCardapio.size());
             }else if (method.equals("POST") && requestURI.equals("/itens-cardapio")) {
-                System.out.println("Chamou adição de cardápio");
-              //  requestChuncks[1]
-              //  database.adicionaItem();
+                System.out.println("Chamou adição de item cardápio");
+
+                if(requestChuncks.length != 1){
+                    clientOut.println("HTTP/1.1 400 Bad Request");
+                    return;
+                }
+
+                String body = requestChuncks[1] ;
+
+                Gson gson = new Gson();
+                ItemCardapio novoItemCardapio = new Gson().fromJson(body, ItemCardapio.class);
+
+                database.adicionaItem(novoItemCardapio);
 
                 clientOut.println("HTTP/1.1 201 Created");
 
