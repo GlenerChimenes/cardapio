@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 public class ServidorItensCardapioComSocket {
 
-    private static final Database database = new Database();
+    private static final Database database = new InMemoryDatabase();
 
     public static void main(String[] args) throws Exception {
 
@@ -104,6 +104,8 @@ public class ServidorItensCardapioComSocket {
 
                 Gson gson = new Gson();
                 ItemCardapio novoItemCardapio = new Gson().fromJson(body, ItemCardapio.class);
+
+                System.out.println(novoItemCardapio);
 
                 database.adicionaItem(novoItemCardapio);
 

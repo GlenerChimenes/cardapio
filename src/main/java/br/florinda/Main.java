@@ -1,18 +1,23 @@
 package br.florinda;
 
-import com.google.gson.Gson;
-
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        Database db = new Database();
+        SQLDatabase database = new SQLDatabase();
+
+        database.listaDeItensCardapio().forEach(System.out::println);
+
+    // parei no JDBC min 21:57
+
+
+
+
+     /*   InMemoryDatabase db = new InMemoryDatabase();
 
         List<ItemCardapio> itens = db.listaDeItensCardapio();
         Optional<ItemCardapio> optionalItem = db.itemCardapioPorId(100L);
@@ -29,7 +34,7 @@ public class Main {
         System.out.println("-----------------------------------");
 
 
-        /*O HashSet usa um HashMap por debaixo dos panos. Então é muito rápido para inserção/alteração de registros*/
+        //O HashSet usa um HashMap por debaixo dos panos. Então é muito rápido para inserção/alteração de registros
          Set<ItemCardapio.CategoriaCardapio> categorias = new HashSet<>();
         Comparator<ItemCardapio.CategoriaCardapio> comparadorPorNome = Comparator.comparing(ItemCardapio.CategoriaCardapio::name);
         //programação tradicional
@@ -81,7 +86,7 @@ public class Main {
                         TreeMap::new,
                         Collectors.counting()
                 ))
-                .forEach((chave, valor) -> System.out.println(chave + " - " + valor));
+                .forEach((chave, valor) -> System.out.println(chave + " - " + valor)); */
 
     }
 }
