@@ -1,5 +1,6 @@
 package br.florinda;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -11,10 +12,13 @@ public class Main {
         SQLDatabase database = new SQLDatabase();
 
         database.listaDeItensCardapio().forEach(System.out::println);
+        int total = database.totalItemCardapio();
+        System.out.println("Total de itens: " + total);
+        //parei video JDBC 2 min 36:17
 
-    // parei no JDBC min 21:57
-
-
+//        var novoItemCardapio = new ItemCardapio(12L, "Tacos carnitas", "Tacos recheados com carne tenra",
+//                ItemCardapio.CategoriaCardapio.PRATOS_PRINCIPAIS, new BigDecimal("25.9"), null);
+//        database.adicionaItem(novoItemCardapio);
 
 
      /*   InMemoryDatabase db = new InMemoryDatabase();
