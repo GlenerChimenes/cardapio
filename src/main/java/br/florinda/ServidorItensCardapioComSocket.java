@@ -10,17 +10,20 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 public class ServidorItensCardapioComSocket {
 
-    private static final Database database = new InMemoryDatabase();
+    private static final Logger logger = Logger.getLogger(ServidorItensCardapioComSocket.class.getName());
+
+    private static final Database database = new SQLDatabase();
 
     public static void main(String[] args) throws Exception {
 
         try (ExecutorService executorService = Executors.newFixedThreadPool(50)) {
 
             try (ServerSocket serverSocket = new ServerSocket(8000)) {
-                System.out.println("Subiu servidor");
+                logger.info("Subiu servidor");
 
                 while (true) {
                     Socket clientSocket = serverSocket.accept();
@@ -42,9 +45,8 @@ public class ServidorItensCardapioComSocket {
             } while (clientIS.available() > 0);
 
             String request = requestBuilder.toString();
-            System.out.println("---------------------------------");
-            System.out.println(request);
-            System.out.println("\n\nChegou um novo request");
+            logger.finest(request);
+            logger.fine("\n\nChegou um novo request");
 
             Thread.sleep(250);
 
@@ -53,13 +55,13 @@ public class ServidorItensCardapioComSocket {
             String[] requestLineAndHeadersChuncks = requestLineAndHeaders.split("\r\n");
             String requestLine = requestLineAndHeadersChuncks[0];
             String[] requestLineChuncks = requestLine.split(" ");
-
             String method = requestLineChuncks[0];
             String requestURI = requestLineChuncks[1];
+            String httpVersion = requestLineChuncks[2];
 
-            System.out.println("------------------------------------");
-            System.out.println(method);
-            System.out.println(requestURI);
+            logger.finer("Method: " + method);
+            logger.finer("Request URI: " + requestURI);
+            logger.finer("HTTP Version: " + httpVersion);
 
             OutputStream clientOS = clientSocket.getOutputStream();
             PrintStream clientOut = new PrintStream(clientOS);
