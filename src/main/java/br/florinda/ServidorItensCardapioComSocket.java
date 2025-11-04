@@ -122,7 +122,6 @@ public class ServidorItensCardapioComSocket {
                 }
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, ex, () -> "Erro ao tratar " + method + " " + requestURI);
-
                 clientOut.println("HTTP/1.1 500 Internal Server Error");
                 clientOut.println();
                 clientOut.println(ex.getMessage());
